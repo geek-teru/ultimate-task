@@ -37,13 +37,13 @@ export default async function Home() {
               height={64}
             />
           ) : (
-            <div className="bg-muted text-muted-foreground flex size-16 items-center justify-center rounded-full text-xl font-medium">
+            <div className="flex size-16 items-center justify-center rounded-full bg-muted text-xl font-medium text-muted-foreground">
               {initial}
             </div>
           )}
           <div className="space-y-1">
             <p className="font-medium">{displayName}</p>
-            <p className="text-muted-foreground text-sm">{user!.email}</p>
+            <p className="text-sm text-muted-foreground">{user!.email}</p>
           </div>
         </div>
 
