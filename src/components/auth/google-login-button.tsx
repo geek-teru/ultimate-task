@@ -44,7 +44,7 @@ export function GoogleLoginButton() {
       <Button onClick={handleClick} disabled={pending} className="w-full">
         {pending ? "リダイレクトしています…" : "Google でログイン"}
       </Button>
-      {errorMessage && <p className="text-destructive text-sm">{errorMessage}</p>}
+      {errorMessage && <p className="text-sm text-destructive">{errorMessage}</p>}
     </div>
   );
 }

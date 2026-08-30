@@ -2,3 +2,6 @@
 node_modules
 package-lock.json
 *.md
+
+# 自動生成ファイル。整形しても次の gen:types で元に戻るため対象外にする
+src/types/database.types.ts
