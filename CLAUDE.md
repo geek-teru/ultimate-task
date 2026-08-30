@@ -242,7 +242,7 @@ AI を使わずにテキスト入力だけで属性を埋められるように�
 | 変数名                          | 用途                                     |
 | ------------------------------- | ---------------------------------------- |
 | `NEXT_PUBLIC_SUPABASE_URL`      | Supabase プロジェクト URL                |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | anon キー（RLS 前提で公開してよい）      |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | 公開用 API キー（RLS 前提で公開してよい）。旧 anon キーの後継 |
 | `SUPABASE_SERVICE_ROLE_KEY`     | サーバー側のみ。マイグレーション等で使用 |
 
 `.env.local` は Git にコミットしない。`.env.example` に変数名だけを残す。

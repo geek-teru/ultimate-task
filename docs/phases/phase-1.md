@@ -168,12 +168,16 @@ Google Workspace の「内部」は組織ドメインに限定できるが、Wor
 
 ## 環境変数
 
-| 変数名                          | 用途                             |
-| ------------------------------- | -------------------------------- |
-| `NEXT_PUBLIC_SUPABASE_URL`      | Supabase の API URL              |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | anon キー                        |
-| `SUPABASE_AUTH_GOOGLE_CLIENT_ID`| Google OAuth クライアント ID     |
-| `SUPABASE_AUTH_GOOGLE_SECRET`   | Google OAuth シークレット        |
+| 変数名                                 | 用途                         |
+| -------------------------------------- | ---------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`             | Supabase の API URL          |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | 公開用 API キー              |
+| `SUPABASE_AUTH_GOOGLE_CLIENT_ID`       | Google OAuth クライアント ID |
+| `SUPABASE_AUTH_GOOGLE_SECRET`          | Google OAuth シークレット    |
+
+CLI 2.116.0 時点で、Supabase の API キーは `anon` / `service_role` から
+`publishable` / `secret` へ移行中。ローカルでは両方が発行されるが、
+クラウドの新規プロジェクトでは新形式が標準になるため、新形式を使う。
 
 `.env.local` はコミットしない。`.env.example` に変数名だけを残す。
 
