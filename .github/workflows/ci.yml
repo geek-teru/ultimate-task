@@ -30,3 +30,40 @@ jobs:
 
       - name: Build
         run: npm run build
+
+  # RLS テストは Supabase の起動が必要で時間がかかるため、check とは別ジョブにして並列に走らせる。
+  rls:
+    runs-on: ubuntu-latest
+    env:
+      # config.toml が env() で参照しており、未設定だと supabase start が失敗する。
+      # RLS テストはメール認証でユーザーを作るため、この値自体は使われない。
+      SUPABASE_AUTH_GOOGLE_CLIENT_ID: dummy
+      SUPABASE_AUTH_GOOGLE_SECRET: dummy
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Start Supabase
+        run: npx supabase start
+
+      # ローカルの接続情報は起動するまで確定しないため、起動後に .env.local を組み立てる。
+      - name: Write .env.local
+        run: |
+          npx supabase status -o env | grep -E '^(API_URL|PUBLISHABLE_KEY)=' > /tmp/supabase.env
+          . /tmp/supabase.env
+          printf 'NEXT_PUBLIC_SUPABASE_URL=%s\nNEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=%s\n' \
+            "$API_URL" "$PUBLISHABLE_KEY" > .env.local
+
+      - name: RLS test
+        run: npm run test:rls
+
+      - name: Stop Supabase
+        if: always()
+        run: npx supabase stop
